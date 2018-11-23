@@ -8,7 +8,7 @@
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>jar</packaging>
 
-	<name>apc-meeting</name>projectreactor
+	<name>apc-meeting</name>
 	<description>Demo project for Spring Boot</description>
 
 	<parent>
@@ -45,9 +45,20 @@
 			<optional>true</optional>
 		</dependency>
 		<dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>junit</groupId>
+                    <artifactId>junit</artifactId>
+                </exclusion>
+            </exclusions>
 		</dependency>
 		<dependency>
 			<groupId>io.projectreactor</groupId>
@@ -64,6 +75,4 @@
 			</plugin>
 		</plugins>
 	</build>
-
-
 </project>
