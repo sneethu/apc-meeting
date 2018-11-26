@@ -7,10 +7,14 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.web.bind.annotation.*;
 
+import java.net.URI;
 import java.time.LocalDateTime;
+import java.util.function.Function;
 
 @RestController
 public class MeetingRestController {
@@ -33,6 +37,14 @@ public class MeetingRestController {
         LOGGER.info("startDate = {} and endDate = {}", start, end );
         response.getHeaders().add("Access-Control-Allow-Origin", "*");
         return meetingService.findMeetings(start, end);
+    }
+
+    @PostMapping
+    Publisher<ResponseEntity<Meeting>> create(@RequestBody Meeting meeting){
+        return meetingService.create(meeting)
+                .map(m -> ResponseEntity.created(URI.create("/meeting/" + m.getId()))
+                        .contentType(MediaType.APPLICATION_JSON_UTF8)
+                        .build());
     }
 
 }

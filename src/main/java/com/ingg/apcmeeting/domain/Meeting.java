@@ -1,9 +1,11 @@
 package com.ingg.apcmeeting.domain;
 
 import lombok.*;
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.math.BigInteger;
 import java.time.LocalDateTime;
 
 @Data
@@ -13,7 +15,7 @@ import java.time.LocalDateTime;
 @Document//(collection = "meetings")
 public class Meeting {
 
-    @Id
+    @Id ObjectId databaseId;
     private Integer id;
 
     private String title;
